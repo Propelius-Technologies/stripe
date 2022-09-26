@@ -69,7 +69,7 @@ public class PaymentSheetExecutor extends Executor {
             : null;
 
         if (!enableGooglePay) {
-            paymentConfiguration = new PaymentSheet.Configuration(merchantDisplayName, customer);
+            paymentConfiguration = new PaymentSheet.Configuration(merchantDisplayName, customer, null, null, PaymentSheet.BillingDetails(PaymentSheet.Address(null, "AE")));
         } else {
             Boolean GooglePayEnvironment = call.getBoolean("GooglePayIsTesting", false);
 
