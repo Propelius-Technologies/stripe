@@ -59,14 +59,26 @@ public class PaymentFlowExecutor extends Executor {
             merchantDisplayName = "";
         }
 
-        Boolean enableGooglePay = call.getBoolean("enableGooglePay", false);
+        Boolean enableGooglePay = false;
 
         final PaymentSheet.CustomerConfiguration customer = customerId != null
             ? new PaymentSheet.CustomerConfiguration(customerId, customerEphemeralKeySecret)
             : null;
 
         if (!enableGooglePay) {
-            paymentConfiguration = new PaymentSheet.Configuration(merchantDisplayName, customer);
+            paymentConfiguration = new PaymentSheet.Configuration(
+                                merchantDisplayName,
+                                customer,
+                                null,
+                                ColorStateList.valueOf(Color.parseColor("#D81F5A")),
+                                new PaymentSheet.BillingDetails(
+                                        new PaymentSheet.Address(null, "AE", null, null, "00000", null),
+                                        null,
+                                        null,
+                                        null
+                                ),
+                                false
+                        );
         } else {
             Boolean GooglePayEnvironment = call.getBoolean("GooglePayIsTesting", false);
 
